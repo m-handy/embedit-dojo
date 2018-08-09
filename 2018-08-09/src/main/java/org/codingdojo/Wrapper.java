@@ -1,21 +1,22 @@
 package org.codingdojo;
 
 import java.util.Arrays;
-import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 class Wrapper {
 
-    public static String fun(String sentence, int length) {
+    private Wrapper() {
+        throw new AssertionError();
+    }
 
-        if (sentence == null || length <= 0) {
+    static String wrapString(String text, int lineLength) {
+
+        if (text == null || lineLength <= 1) {
             throw new IllegalArgumentException();
         }
-        String[] paragraphs = sentence.split("\n");
-        final StringBuilder wrappedString = new StringBuilder();
+        String[] paragraphs = text.split("\n");
 
-        return String.join("\n", Arrays.stream(paragraphs).map(s -> wrapParagraph(s,length)).collect(Collectors.toList()));
+        return Arrays.stream(paragraphs).map(s -> wrapParagraph(s,lineLength)).collect(Collectors.joining("\n"));
     }
 
     private static String wrapParagraph(String sentence, int length) {
