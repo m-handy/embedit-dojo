@@ -51,6 +51,15 @@ public class WrapperTest {
     @Test
     public void testMultiWrap() {
         assertThat(fun("a baa c", 2), is("a\nb-\naa\nc"));
-
     }
+
+    @Test
+    public void testMultiWrap2() {
+        assertThat(fun("a baaaa c", 3), is("a\nba-\naaa\nc"));
+    }
+    @Test
+    public void testNewLine() {
+        assertThat(fun("a\nahoj c", 3), is("a\nah-\noj\nc"));
+    }
+
 }
