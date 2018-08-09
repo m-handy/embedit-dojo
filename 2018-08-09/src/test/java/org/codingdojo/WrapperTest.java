@@ -3,6 +3,7 @@ package org.codingdojo;
 import org.junit.Test;
 
 import static org.codingdojo.Wrapper.*;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 public class WrapperTest {
@@ -14,12 +15,12 @@ public class WrapperTest {
 
     @Test
     public void testNonWrappingInput() {
-        assertEquals(fun("blahblah", 10),"blahblah");
+        assertEquals(fun("blahblah", 10), "blahblah");
     }
 
     @Test
     public void testSingleWrap() {
-        assertEquals(fun("Hello world", 5),"Hello\nworld");
+        assertEquals(fun("Hello world", 5), "Hello\nworld");
     }
 
     @Test
@@ -35,5 +36,21 @@ public class WrapperTest {
     @Test
     public void testMultipleWordsOnLine2Wrap() {
         assertEquals(fun("Hello world Hello world", 11), "Hello world\nHello world");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testNegativeLength() {
+        fun("Hello world Hello world", -1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testZeroLength() {
+        fun("Hello world Hello world", 0);
+    }
+
+    @Test
+    public void testMultiWrap() {
+        assertThat(fun("a baa c", 2), is("a\nb-\naa\nc"));
+
     }
 }

@@ -1,36 +1,34 @@
 package org.codingdojo;
 
-import java.util.*;
-
 class Wrapper {
 
     public static String fun(String sentence, int length) {
 
-        if (sentence == null) {
+        if (sentence == null || length <= 0) {
             throw new IllegalArgumentException();
         }
 
-        if (length < sentence.length()) {
-            if (length > 10) {
-                String[] words = sentence.split(" ");
+        String[] words = sentence.split(" ");
 
-                StringBuilder wrappedString = new StringBuilder();
-                int linelength = 0;
-                for (String word : words) {
-                    if (linelength + word.length() > length) {
-                        linelength = 0;
-                        wrappedString.append("\n");
-                    } else {
-                        wrappedString.append(" ");
-                    }
-                    linelength += word.length();
+        StringBuilder wrappedString = new StringBuilder();
+        int lineLength = 0;
+        for (String word : words) {
+            if (lineLength + word.length() > length) {
+                lineLength = 0;
+                if (word.length() > length) {
+                    wrappedString.append("\n");
+                    wrappedString.append(word.substring(0,1)).append("-\n").append(word.substring(1));
+                } else {
+                    wrappedString.append("\n");
                     wrappedString.append(word);
                 }
-                return wrappedString.toString().substring(1, wrappedString.length());
+            } else {
+                wrappedString.append(" ");
+                wrappedString.append(word);
             }
-            return sentence.replace(" ", "\n");
-        } else {
-            return sentence;
+            lineLength += word.length();
+
         }
+        return wrappedString.toString().substring(1, wrappedString.length());
     }
 }
