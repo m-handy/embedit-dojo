@@ -27,11 +27,16 @@ class Wrapper {
             if (lineLength + word.length() > length) {
                 lineLength = 0;
                 wrappedString.append("\n");
-                if (word.length() > length) {
-                    wrappedString.append(word.substring(0,length-1)).append("-\n").append(word.substring(length-1));
-                } else {
-                    wrappedString.append(word);
-                }
+                    String wordRemain = word;
+                    if (wordRemain.length() > length) {
+                        while (wordRemain.length() > length) {
+                            wrappedString.append(wordRemain.substring(0, length - 1)).append("-\n");
+                            wordRemain = wordRemain.substring(length-1);
+                        }
+                        wrappedString.append(wordRemain);
+                    } else {
+                        wrappedString.append(word);
+                    }
             } else {
                 wrappedString.append(" ");
                 wrappedString.append(word);
