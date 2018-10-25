@@ -77,4 +77,10 @@ public class WrapperTest {
     public void testEmptyString() {
         assertThat(wrapString("", 2), is(""));
     }
+
+    @Test
+    public void testSpacesInString() {
+        assertThat(wrapString(" \n ", 2), is("\n"));
+    }
+
 }

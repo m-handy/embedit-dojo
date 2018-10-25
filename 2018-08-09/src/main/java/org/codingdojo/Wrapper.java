@@ -45,6 +45,9 @@ class Wrapper {
             lineLength += word.length();
 
         }
-        return wrappedString.toString().substring(1, wrappedString.length());
+        if (wrappedString.length() >=1) {
+            return wrappedString.toString().substring(1, wrappedString.length());
+        }
+        return wrappedString.toString();
     }
 }
